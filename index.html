@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minhua Huang | Texas A&M University-Corpus Christi</title>
+    <title>Minhua Huang | TAMU-CC</title>
     <style>
         body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; color: #333; }
         
@@ -17,9 +17,9 @@
         .bio-text { flex: 2; }
         .profile-pic { flex: 1; max-width: 280px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-        /* Sections */
+        /* Section Visibility Logic */
         .content-section { display: none; animation: fadeIn 0.5s; }
-        #home-section { display: block; } /* Show Home/Bio by default */
+        #bio-section { display: block; } /* Bio shows first */
 
         h1 { color: #004d40; margin-top: 0; }
         h2 { color: #004d40; border-bottom: 1px solid #eee; padding-bottom: 10px; }
@@ -31,21 +31,19 @@
 <body>
 
     <nav>
-        <a onclick="showSection('home-section')">Home</a>
         <a onclick="showSection('teaching-section')">Teaching</a>
         <a onclick="showSection('publications-section')">Publications</a>
+        <a onclick="showSection('others-section')">Others</a>
     </nav>
 
-    <div id="home-section" class="content-section">
+    <div id="bio-section" class="content-section">
         <div class="profile-container">
             <div class="bio-text">
                 <h1>Minhua Huang</h1>
                 <p><strong>Professor of Computer Science</strong><br>
-                Department of Computer Science, Texas A&M University-Corpus Christi</p>
-                
-                <p>I am a researcher and educator specializing in <strong>Human-Computer Interaction (HCI)</strong> and <strong>Natural Language Processing (NLP)</strong>. My current work focuses on emotionally adaptive dialogue systems and distributed optimization using Genetic Algorithms.</p>
-                
-                <p>I will be presenting my recent work at <strong>HCII 2026</strong> in Montreal and <strong>GECCO 2026</strong> in San José, Costa Rica.</p>
+                Texas A&M University-Corpus Christi</p>
+                <p>My research focuses on <strong>Human-Computer Interaction (HCI)</strong> and <strong>Natural Language Processing (NLP)</strong>, specifically exploring affective computing and sentiment-aware dialogue systems. I also develop optimization algorithms using Parallel Genetic Algorithms (RC-PGA).</p>
+                <p><em>Click the menu options above to view my teaching history or research publications.</em></p>
             </div>
             <img src="profile.jpg" alt="Minhua Huang" class="profile-pic">
         </div>
@@ -53,18 +51,25 @@
 
     <div id="teaching-section" class="content-section">
         <h2>Teaching & Courses</h2>
-        <p>Below is a comprehensive list of my current and historical courses. You can also <a href="teaching.pdf" target="_blank">download the PDF here</a>.</p>
-        <div style="width: 100%; height: 800px; border: 1px solid #ccc;">
+        <p><a href="javascript:void(0)" onclick="showSection('bio-section')" style="color: #004d40;">&larr; Back to Bio</a></p>
+        <div style="width: 100%; height: 800px; border: 1px solid #ccc; margin-top: 20px;">
             <embed src="teaching.pdf" type="application/pdf" width="100%" height="100%" />
         </div>
     </div>
 
     <div id="publications-section" class="content-section">
         <h2>Selected Publications</h2>
+        <p><a href="javascript:void(0)" onclick="showSection('bio-section')" style="color: #004d40;">&larr; Back to Bio</a></p>
         <ul>
-            <li><strong>SentimentAwareChatbot: An HCI–NLP Framework for Emotionally Adaptive Dialogue</strong>, HCII 2026.</li>
-            <li><strong>Ring-Crossover Parallel Genetic Algorithm (RC-PGA)</strong>, GECCO 2026.</li>
+            <li><strong>SentimentAwareChatbot: An HCI–NLP Framework for Emotionally Adaptive Dialogue</strong>, HCII 2026, Montreal.</li>
+            <li><strong>Ring-Crossover Parallel Genetic Algorithm (RC-PGA) for Distributed Optimization</strong>, GECCO 2026, San José.</li>
         </ul>
+    </div>
+
+    <div id="others-section" class="content-section">
+        <h2>Others</h2>
+        <p><a href="javascript:void(0)" onclick="showSection('bio-section')" style="color: #004d40;">&larr; Back to Bio</a></p>
+        <p>This section includes academic service, professional memberships (ACM/IEEE), and other institutional contributions at TAMU-CC.</p>
     </div>
 
     <script>
@@ -73,10 +78,8 @@
             const sections = document.querySelectorAll('.content-section');
             sections.forEach(s => s.style.display = 'none');
             
-            // Show the selected section
+            // Show the clicked section
             document.getElementById(id).style.display = 'block';
-            
-            // Scroll to top
             window.scrollTo(0, 0);
         }
     </script>
