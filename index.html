@@ -84,7 +84,7 @@
     </div>
 
    <script>
-    // DATA COLLECTIONS
+    // 1. DATA COLLECTION: Added 'type' and 'detail' for clear labeling
     const courses = [
         { id: "COSC 4330.001", name: "Introduction to Artificial Intelligence", year: 2026, term: "Spring" },
         { id: "COSC 6340.001", name: "Human-Computer Interaction", year: 2026, term: "Spring" },
@@ -103,7 +103,7 @@
         { id: "COSC 6361", name: "Parallel Algorithms", year: 2024, term: "Fall" }, 
         { id: "COSC 6334", name: "Design and Analysis of Algorithms", year: 2024, term: "Spring" },
         { id: "COSC 6340", name: "Human-Computer Interaction", year: 2024, term: "Spring" }, 
-        { id: "COSC 6354", name: "Artificial Intelligence", year: 2024, term: "Spring" }, 
+        { id: "COSC 6354", name: "Artificial Intelligencce", year: 2024, term: "Spring" }, 
         { id: "COSC 6590", name: "Selected Topics", year: 2024, term: "Fall" }
     ];
 
@@ -112,44 +112,50 @@
             title: "SentimentAwareChatbot: An HCI–NLP Framework for Emotionally Adaptive Dialogue",
             authors: "Minhua Huang", 
             type: "Conference",
-            venue: "28th International Conference on Human-Computer Interaction (HCII 2026)", 
+            venue: "HCII 2026", 
+            detail: "28th International Conference on Human-Computer Interaction",
             year: 2026 
         },
         { 
             title: "RC-PGA: A Ring-Crossover Parallel Genetic Algorithm for Large-Scale Combinatorial Optimization", 
             authors: "Minhua Huang", 
             type: "Conference",
-            venue: "The Genetic and Evolutionary Computation Conference (GECCO 2026)", 
+            venue: "GECCO 2026", 
+            detail: "The Genetic and Evolutionary Computation Conference",
             year: 2026 
         },
         { 
             title: "A Method for Discovering Knowledge in Texts", 
             authors: "Minhua Huang, Robert M. Haralick", 
             type: "Journal",
-            venue: "Pattern Recognition Letters, Vol.124, pp. 21-30", 
+            venue: "Pattern Recognition Letters", 
+            detail: "Vol.124, pp. 21-30", 
             year: 2019 
         },
         { 
             title: "Discovering Text Patterns by a New Graphical Model", 
             authors: "Minhua Huang, Robert M. Haralick", 
             type: "Journal",
-            venue: "Machine Learning and Data Mining, Vol.4, pp. 55-75", 
+            venue: "Machine Learning and Data Mining", 
+            detail: "Vol.4, pp. 55-75", 
             year: 2011 
         },
         { 
             title: "Recognizing Patterns in Text", 
             authors: "Minhua Huang, Robert M. Haralick", 
-            type: "book",
-            venue: "Pattern Recognition and Machine Vision, pp. 19-35", 
+            type: "Book",
+            venue: "Pattern Recognition and Machine Vision", 
+            detail: "pp. 19-35", 
             year: 2010 
         }
     ];
 
+    // 2. AUTOMATION LOGIC
     function initSite() {
-        const curYear = 2026; // Set manually to match your current data
+        const curYear = 2026;
         const prevYear = curYear - 1;
 
-        // Update Labels on Home Page
+        // Sync labels with current year
         document.getElementById('label-teach').innerText = curYear + " COURSES";
         document.getElementById('label-res').innerText = prevYear + "-" + curYear + " RESEARCH";
 
@@ -158,7 +164,7 @@
         const mainR = document.getElementById('list-res-main');
         const fullR = document.getElementById('list-res-full');
 
-        // Clear existing content (important if re-running)
+        // Clear placeholders
         mainT.innerHTML = ""; fullT.innerHTML = ""; mainR.innerHTML = ""; fullR.innerHTML = "";
 
         // Populate Teaching
@@ -169,12 +175,19 @@
             fullT.appendChild(li);
         });
 
-        // Populate Research
+        // Populate Research with Type Labels
         research.forEach(r => {
             const li = document.createElement('li');
             li.style.marginBottom = "15px";
-            li.innerHTML = `<strong>${r.title}</strong><br><small>${r.authors}</small><br><em>${r.venue}</em> (${r.year})`;
-            // Show current and previous year on main page
+            
+            // Format: Title / Authors / TYPE: Venue Name, Details (Year)
+            li.innerHTML = `
+                <strong>${r.title}</strong><br>
+                <small>${r.authors}</small><br>
+                <span style="color: #00796b; font-weight: bold; font-size: 0.9em;">${r.type}: </span>
+                <em>${r.venue}</em>, ${r.detail} (${r.year})
+            `;
+            
             if (r.year === curYear || r.year === prevYear) mainR.appendChild(li.cloneNode(true));
             fullR.appendChild(li);
         });
