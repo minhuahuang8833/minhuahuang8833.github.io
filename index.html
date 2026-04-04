@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <style>
         body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; color: #333; }
         
-        /* Navigation Bar */
+        /* Navigation */
         nav { border-bottom: 2px solid #004d40; padding: 15px 0; margin-bottom: 30px; text-align: right; }
         nav a { margin-left: 25px; text-decoration: none; color: #004d40; font-weight: bold; cursor: pointer; }
         nav a:hover { color: #00796b; text-decoration: underline; }
@@ -19,19 +19,20 @@
 
         /* Content Sections */
         .content-section { display: none; animation: fadeIn 0.5s; }
-        #main-page { display: block; } /* Visible by default */
+        #main-page { display: block; } 
 
-        /* Outline Styling */
         h1 { color: #004d40; margin-top: 0; }
         h2 { color: #004d40; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 30px; }
-        .current-outline { background: #f9f9f9; padding: 15px; border-left: 5px solid #004d40; margin-top: 20px; border-radius: 4px; }
-        .publication-item { margin-bottom: 15px; border-left: 3px solid #0277bd; padding-left: 10px; }
+        
+        /* Outline Styling */
+        .yearly-outline { background: #fdfdfd; padding: 20px; border: 1px solid #eee; border-left: 5px solid #004d40; margin-top: 25px; border-radius: 4px; }
+        .window-label { display: inline-block; background: #004d40; color: white; padding: 2px 12px; border-radius: 4px; font-size: 0.8em; margin-bottom: 10px; text-transform: uppercase; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @media (max-width: 768px) { .profile-container { flex-direction: column-reverse; text-align: center; } .profile-pic { margin: 0 auto 20px; } }
     </style>
 </head>
-<body onload="runAutomation()">
+<body onload="runTwoYearAutomation()">
 
     <nav>
         <a onclick="showSection('main-page')">Home</a>
@@ -46,18 +47,16 @@
                 <h1>Minhua Huang</h1>
                 <p><strong>Professor of Computer Science</strong><br>
                 Texas A&M University-Corpus Christi</p>
-                <p>I specialize in <strong>Human-Computer Interaction (HCI)</strong> and <strong>Natural Language Processing (NLP)</strong>, focusing on affective computing and distributed optimization using Parallel Genetic Algorithms.</p>
+                <p>My research focuses on <strong>HCI</strong> and <strong>NLP</strong>, specifically affective computing and parallel optimization via Genetic Algorithms.</p>
                 
-                <div class="current-outline">
-                    <strong id="semester-label">Current Teaching (Spring 2026):</strong>
-                    <ul id="current-courses-main" style="margin: 5px 0 0 0; padding-left: 20px;">
-                        </ul>
+                <div class="yearly-outline">
+                    <span class="window-label" id="teach-year">2026 Courses</span>
+                    <ul id="main-teaching-list" style="margin: 0; padding-left: 20px;"></ul>
                 </div>
 
-                <div class="current-outline" style="border-left-color: #0277bd;">
-                    <strong>Recent & Upcoming Publications:</strong>
-                    <ul id="current-pubs-main" style="margin: 5px 0 0 0; padding-left: 20px;">
-                        </ul>
+                <div class="yearly-outline" style="border-left-color: #0277bd;">
+                    <span class="window-label" style="background: #0277bd;" id="research-window">2025-2026 Research</span>
+                    <ul id="main-research-list" style="margin: 0; padding-left: 20px;"></ul>
                 </div>
             </div>
             <img src="profile.jpg" alt="Minhua Huang" class="profile-pic">
@@ -65,89 +64,98 @@
     </div>
 
     <div id="teaching-history" class="content-section">
-        <h2>Teaching History</h2>
-        <p>Complete record of courses taught at TAMU-CC:</p>
-        <ul id="history-list-full">
-            </ul>
+        <h2>Full Teaching History</h2>
+        <ul id="full-teaching-list"></ul>
         <p><a onclick="showSection('main-page')" style="color:#004d40; cursor:pointer;">&larr; Back to Home</a></p>
     </div>
 
     <div id="publications-full" class="content-section">
         <h2>Publications & Research</h2>
-        <div id="pubs-list-full">
-            </div>
+        <ul id="full-research-list"></ul>
         <p><a onclick="showSection('main-page')" style="color:#004d40; cursor:pointer;">&larr; Back to Home</a></p>
     </div>
 
     <div id="others-section" class="content-section">
-        <h2>Professional Service & Others</h2>
+        <h2>Others</h2>
         <ul>
             <li>Professional Member: ACM, IEEE</li>
             <li>Departmental Committees, TAMU-CC</li>
-            <li>Reviewer for HCI and Machine Learning Journals</li>
-            <li>Academic Integrity Lead: Secure Exam Environments</li>
+            <li>Academic Integrity & Secure Exam Specialist</li>
         </ul>
         <p><a onclick="showSection('main-page')" style="color:#004d40; cursor:pointer;">&larr; Back to Home</a></p>
     </div>
 
     <script>
-        // --- DATA COLLECTIONS ---
         const courses = [
-            { id: "CSCI 43xx", name: "Parallel Computing", term: "Spring 2026", end: "2026-05-31" },
-            { id: "CSCI 53xx", name: "Human-Computer Interaction", term: "Spring 2026", end: "2026-05-31" },
-            { id: "CSCI 2436", name: "Data Structures", term: "Fall 2025", end: "2025-12-15" },
-            { id: "CSCI 1436", name: "Programming Fundamentals I", term: "Fall 2025", end: "2025-12-15" }
+            { id: "COSC 4330.001", name: "Introduction to Artificial Intelligence", year: 2026, term: "Spring" },
+            { id: "COSC 6340.001", name: "Human-Computer Interaction", year: 2026, term: "Spring" },
+            { id: "COSC 6354.001", name: "Artificial Intelligence", year: 2026, term: "Spring" },
+            { id: "COSC 6360.001", name: "Parallel Computing", year: 2026, term: "Spring" },
+            { id: "COSC 6324", name: "Digital Image Processing", year: 2025, term: "Fall" }, 
+            { id: "COSC 6356", name: "Theory of Computation", year: 2025, term: "Fall" }, 
+            { id: "COSC 6361", name: "Parallel Algorithms", year: 2025, term: "Fall" }, 
+            { id: "COSC 6334", name: "Design and Analysis of Algorithms", year: 2025, term: "Spring" },
+            { id: "COSC 6340", name: "Human-Computer Interaction", year: 2025, term: "Spring" }, 
+            { id: "COSC 6354", name: "Artificial Intelligencce", year: 2025, term: "Spring" }, 
+            { id: "COSC 6334", name: "Design and Analysis of Algorithms", year: 2024, term: "Fall" }, 
+            { id: "COSC 6339", name: "Deep Learning", year: 2024, term: "Fall" }, 
+            { id: "COSC 6354", name: "Artificial Intelligence", year: 2024, term: "Fall" }, 
+            { id: "COSC 6356", name: "Theory of Computation", year: 2024, term: "Fall" }, 
+            { id: "COSC 6361", name: "Parallel Algorithms", year: 2024, term: "Fall" }, 
+            { id: "COSC 6334", name: "Design and Analysis of Algorithms", year: 2024, term: "Spring" },
+            { id: "COSC 6340", name: "Human-Computer Interaction", year: 2024, term: "Spring" }, 
+            { id: "COSC 6354", name: "Artificial Intelligencce", year: 2024, term: "Spring" }, 
+             { id: "COSC 6354", name: "Artificial Intelligence", year: 2024, term: "Spring" }, 
+              { id: "COSC 6590", name: "Selected Topics", year: 2024, term: "Fall" }, 
         ];
 
-        const publications = [
-            { title: "SentimentAwareChatbot: An HCI–NLP Framework", venue: "HCII 2026, Montreal", date: "2026-07-26", status: "Upcoming" },
-            { title: "Ring-Crossover Parallel Genetic Algorithm (RC-PGA)", venue: "GECCO 2026, San José", date: "2026-07-13", status: "Upcoming" },
-            { title: "GA-based Wrapper for Feature Selection", venue: "AMLDS 2026", date: "2026-04-01", status: "Recent" }
+        const research = [
+            { title: "SentimentAwareChatbot: An HCI–NLP Framework for
+Emotionally Adaptive Dialogue",authors" "Minhua Huang",  venue: "28TH International Conference on
+Human-Computer Interaction, HCII 2026", year: 2026 },
+            { title: "RC-PGA: A Ring-Crossover Parallel Genetic Algorithm for Large-Scale Combinatorial Optimization", authors: "Minhua Huang", 
+ venue: "The Genetic and Evolutionary Computation Conference, GECCO 2026", year: 2026 },
+            { title: "A Method for Discovering Knowledge in Texts", authors: "Minhua Huang, Robert M. Haralick", Journal: "Pattern Recongition Letters", year: 2019, Vol.124 21-30 },          
+            { title: "Discovering Text Patterns by a New Graphical Model",  authors: "Minhua Huang, Robert M. Haralick", Journal: "Machine Learning and Data Mining", year: 2011, Vol.4 55-75}
+            { title: "Recognizing Patterns in  Text ",  authors: "Minhua Huang, Robert M. Haralick", book: "Parern Recongition and Maching Vison", year: 2010, 19-35}
+            
         ];
 
-        // --- AUTOMATION LOGIC ---
-        function runAutomation() {
-            const today = new Date();
-            
-            // Populate Teaching
-            const mainTeach = document.getElementById('current-courses-main');
-            const fullTeach = document.getElementById('history-list-full');
-            
+        function runTwoYearAutomation() {
+            const currentYear = new Date().getFullYear();
+            const lastYear = currentYear - 1;
+
+            // Update Labels
+            document.getElementById('teach-year').innerText = currentYear + " Courses";
+            document.getElementById('research-window').innerText = lastYear + "-" + currentYear + " Research";
+
+            const mainTeach = document.getElementById('main-teaching-list');
+            const fullTeach = document.getElementById('full-teaching-list');
+            const mainRes = document.getElementById('main-research-list');
+            const fullRes = document.getElementById('full-research-list');
+
+            // Logic for Teaching (Shows Current Year Only)
             courses.forEach(c => {
                 const li = document.createElement('li');
-                li.innerHTML = `<strong>${c.id}:</strong> ${c.name} (${c.term})`;
-                
-                if (today <= new Date(c.end)) {
-                    mainTeach.appendChild(li.cloneNode(true));
-                }
+                li.innerHTML = `<strong>${c.id}:</strong> ${c.name} (${c.term} ${c.year})`;
+                if (c.year === currentYear) mainTeach.appendChild(li.cloneNode(true));
                 fullTeach.appendChild(li);
             });
 
-            // Populate Publications
-            const mainPubs = document.getElementById('current-pubs-main');
-            const fullPubs = document.getElementById('pubs-list-full');
-            
-            publications.forEach(p => {
-                const div = document.createElement('div');
-                div.className = 'publication-item';
-                div.innerHTML = `<strong>${p.title}</strong><br><em>${p.venue}</em> (${p.status})`;
-                
-                if (p.status === "Upcoming" || p.status === "Recent") {
-                    const li = document.createElement('li');
-                    li.innerHTML = `<strong>${p.venue}:</strong> ${p.title}`;
-                    mainPubs.appendChild(li);
-                }
-                fullPubs.appendChild(div);
+            // Logic for Research (Shows Current + Previous Year)
+            research.forEach(r => {
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>${r.venue}:</strong> ${r.title} (${r.year})`;
+                if (r.year === currentYear || r.year === lastYear) mainRes.appendChild(li.cloneNode(true));
+                fullRes.appendChild(li);
             });
         }
 
-        // --- NAVIGATION LOGIC ---
         function showSection(id) {
             document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
             document.getElementById(id).style.display = 'block';
             window.scrollTo(0, 0);
         }
     </script>
-
 </body>
 </html>
