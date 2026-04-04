@@ -5,114 +5,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minhua Huang | TAMU-CC</title>
     <style>
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; color: #333; scroll-behavior: smooth; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; color: #333; }
         
-        /* Sticky Navigation */
-        nav { position: sticky; top: 0; background: white; border-bottom: 2px solid #004d40; padding: 15px 0; margin-bottom: 30px; text-align: right; z-index: 1000; }
-        nav a { margin-left: 25px; text-decoration: none; color: #004d40; font-weight: bold; font-size: 0.95em; }
-        nav a:hover { color: #00796b; border-bottom: 2px solid #00796b; }
+        /* Navigation Bar */
+        nav { border-bottom: 2px solid #004d40; padding: 15px 0; margin-bottom: 30px; text-align: right; }
+        nav a { margin-left: 25px; text-decoration: none; color: #004d40; font-weight: bold; cursor: pointer; }
+        nav a:hover { color: #00796b; text-decoration: underline; }
 
-        /* Bio/Photo Header */
-        .profile-container { display: flex; gap: 40px; align-items: flex-start; margin-bottom: 40px; }
+        /* Profile Layout */
+        .profile-container { display: flex; gap: 40px; align-items: flex-start; }
         .bio-text { flex: 2; }
-        .profile-pic { flex: 1; max-width: 250px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .profile-pic { flex: 1; max-width: 250px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-        /* Section Outlines */
-        section { padding: 40px 0; border-bottom: 1px solid #eee; }
-        h1 { color: #004d40; margin-top: 0; font-size: 2.2em; }
-        h2 { color: #004d40; font-size: 1.6em; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1.5px; }
-        
-        /* Sub-headings for Current/Past */
-        .sub-heading { color: #00695c; font-weight: bold; margin-top: 25px; margin-bottom: 10px; display: block; border-left: 4px solid #004d40; padding-left: 10px; }
+        /* Content Sections */
+        .content-section { display: none; animation: fadeIn 0.5s; }
+        #main-page { display: block; } /* Visible by default */
 
-        ul { padding-left: 20px; }
-        li { margin-bottom: 12px; }
-        .venue { color: #00796b; font-weight: 500; }
+        /* Outline Styling */
+        h1 { color: #004d40; margin-top: 0; }
+        h2 { color: #004d40; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 30px; }
+        .current-outline { background: #f9f9f9; padding: 15px; border-left: 5px solid #004d40; margin-top: 20px; border-radius: 4px; }
+        .publication-item { margin-bottom: 15px; border-left: 3px solid #0277bd; padding-left: 10px; }
 
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @media (max-width: 768px) { .profile-container { flex-direction: column-reverse; text-align: center; } .profile-pic { margin: 0 auto 20px; } }
     </style>
 </head>
-<body>
+<body onload="runAutomation()">
 
     <nav>
-        <a href="#teaching">Teaching</a>
-        <a href="#publications">Publications</a>
-        <a href="#others">Others</a>
+        <a onclick="showSection('main-page')">Home</a>
+        <a onclick="showSection('teaching-history')">Teaching History</a>
+        <a onclick="showSection('publications-full')">Publications</a>
+        <a onclick="showSection('others-section')">Others</a>
     </nav>
 
-    <div class="profile-container">
-        <div class="bio-text">
-            <h1>Minhua Huang</h1>
-            <p><strong>Professor of Computer Science</strong><br>
-            Department of Computing Sciences, Texas A&M University-Corpus Christi</p>
-            
-            <p>My research integrates <strong>Human-Computer Interaction (HCI)</strong> and <strong>Natural Language Processing (NLP)</strong>. I focus on affective computing to create emotionally adaptive dialogue systems. Additionally, I specialize in distributed optimization through Parallel Genetic Algorithms (RC-PGA).</p>
+    <div id="main-page" class="content-section">
+        <div class="profile-container">
+            <div class="bio-text">
+                <h1>Minhua Huang</h1>
+                <p><strong>Professor of Computer Science</strong><br>
+                Texas A&M University-Corpus Christi</p>
+                <p>I specialize in <strong>Human-Computer Interaction (HCI)</strong> and <strong>Natural Language Processing (NLP)</strong>, focusing on affective computing and distributed optimization using Parallel Genetic Algorithms.</p>
+                
+                <div class="current-outline">
+                    <strong id="semester-label">Current Teaching (Spring 2026):</strong>
+                    <ul id="current-courses-main" style="margin: 5px 0 0 0; padding-left: 20px;">
+                        </ul>
+                </div>
+
+                <div class="current-outline" style="border-left-color: #0277bd;">
+                    <strong>Recent & Upcoming Publications:</strong>
+                    <ul id="current-pubs-main" style="margin: 5px 0 0 0; padding-left: 20px;">
+                        </ul>
+                </div>
+            </div>
+            <img src="profile.jpg" alt="Minhua Huang" class="profile-pic">
         </div>
-        <img src="profile.jpg" alt="Minhua Huang" class="profile-pic">
     </div>
 
-    <section id="teaching">
-        <h2>Teaching</h2>
-        
-        <span class="sub-heading">Current Courses (Spring 2026)</span>
-        <ul>
-            <li><strong>CSCI 43xx:</strong> Parallel Computing</li>
-            <li><strong>CSCI 53xx:</strong> Human-Computer Interaction</li>
-        </ul>
-
-        <span class="sub-heading">Teaching History</span>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 0.95em;">
-            <ul>
-                <li>CSCI 1436: Programming Fundamentals I</li>
-                <li>CSCI 2436: Data Structures</li>
-                <li>CSCI 3342: Operating Systems</li>
+    <div id="teaching-history" class="content-section">
+        <h2>Teaching History</h2>
+        <p>Complete record of courses taught at TAMU-CC:</p>
+        <ul id="history-list-full">
             </ul>
-            <ul>
-                <li>CSCI 5354: Advanced Algorithms</li>
-                <li>CSCI 6363: Affective Computing</li>
-                <li>CSCI 6370: Natural Language Processing</li>
-            </ul>
-        </div>
-    </section>
+        <p><a onclick="showSection('main-page')" style="color:#004d40; cursor:pointer;">&larr; Back to Home</a></p>
+    </div>
 
-    <section id="publications">
-        <h2>Publications</h2>
-        
-        <span class="sub-heading">Current & Upcoming (2026)</span>
+    <div id="publications-full" class="content-section">
+        <h2>Publications & Research</h2>
+        <div id="pubs-list-full">
+            </div>
+        <p><a onclick="showSection('main-page')" style="color:#004d40; cursor:pointer;">&larr; Back to Home</a></p>
+    </div>
+
+    <div id="others-section" class="content-section">
+        <h2>Professional Service & Others</h2>
         <ul>
-            <li>
-                <strong>SentimentAwareChatbot: An HCI–NLP Framework for Emotionally Adaptive Dialogue</strong>
-                <br><span class="venue">HCI International (HCII) 2026</span> | Montreal, Canada.
-            </li>
-            <li>
-                <strong>Ring-Crossover Parallel Genetic Algorithm (RC-PGA) for Distributed Optimization</strong>
-                <br><span class="venue">Genetic and Evolutionary Computation Conference (GECCO) 2026</span> | San José, Costa Rica.
-            </li>
-            <li>
-                <strong>GA-based Wrapper for Feature Selection in Distributed Environments</strong>
-                <br><span class="venue">AMLDS 2026</span> | Submission ID: 3896.
-            </li>
+            <li>Professional Member: ACM, IEEE</li>
+            <li>Departmental Committees, TAMU-CC</li>
+            <li>Reviewer for HCI and Machine Learning Journals</li>
+            <li>Academic Integrity Lead: Secure Exam Environments</li>
         </ul>
+        <p><a onclick="showSection('main-page')" style="color:#004d40; cursor:pointer;">&larr; Back to Home</a></p>
+    </div>
 
-        <span class="sub-heading">Selected Past Work</span>
-        <ul style="font-size: 0.95em;">
-            <li>Work on Bimodal Affective Alignment in Dialogue Systems.</li>
-            <li>Distributed Optimization with Recursive Doubling Prefix Sums.</li>
-        </ul>
-    </section>
+    <script>
+        // --- DATA COLLECTIONS ---
+        const courses = [
+            { id: "CSCI 43xx", name: "Parallel Computing", term: "Spring 2026", end: "2026-05-31" },
+            { id: "CSCI 53xx", name: "Human-Computer Interaction", term: "Spring 2026", end: "2026-05-31" },
+            { id: "CSCI 2436", name: "Data Structures", term: "Fall 2025", end: "2025-12-15" },
+            { id: "CSCI 1436", name: "Programming Fundamentals I", term: "Fall 2025", end: "2025-12-15" }
+        ];
 
-    <section id="others">
-        <h2>Others</h2>
-        <ul>
-            <li>Professional Membership: ACM, IEEE.</li>
-            <li>Faculty Advisor and Departmental Committee Member, TAMU-CC.</li>
-            <li>Academic Integrity Lead: Implementations in Respondus LockDown Browser and Canvas.</li>
-        </ul>
-    </section>
+        const publications = [
+            { title: "SentimentAwareChatbot: An HCI–NLP Framework", venue: "HCII 2026, Montreal", date: "2026-07-26", status: "Upcoming" },
+            { title: "Ring-Crossover Parallel Genetic Algorithm (RC-PGA)", venue: "GECCO 2026, San José", date: "2026-07-13", status: "Upcoming" },
+            { title: "GA-based Wrapper for Feature Selection", venue: "AMLDS 2026", date: "2026-04-01", status: "Recent" }
+        ];
 
-    <footer style="margin-top: 60px; text-align: center; color: #999; font-size: 0.85em; padding-bottom: 40px;">
-        &copy; 2026 Minhua Huang | Last updated: April 2026
-    </footer>
+        // --- AUTOMATION LOGIC ---
+        function runAutomation() {
+            const today = new Date();
+            
+            // Populate Teaching
+            const mainTeach = document.getElementById('current-courses-main');
+            const fullTeach = document.getElementById('history-list-full');
+            
+            courses.forEach(c => {
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>${c.id}:</strong> ${c.name} (${c.term})`;
+                
+                if (today <= new Date(c.end)) {
+                    mainTeach.appendChild(li.cloneNode(true));
+                }
+                fullTeach.appendChild(li);
+            });
+
+            // Populate Publications
+            const mainPubs = document.getElementById('current-pubs-main');
+            const fullPubs = document.getElementById('pubs-list-full');
+            
+            publications.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'publication-item';
+                div.innerHTML = `<strong>${p.title}</strong><br><em>${p.venue}</em> (${p.status})`;
+                
+                if (p.status === "Upcoming" || p.status === "Recent") {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<strong>${p.venue}:</strong> ${p.title}`;
+                    mainPubs.appendChild(li);
+                }
+                fullPubs.appendChild(div);
+            });
+        }
+
+        // --- NAVIGATION LOGIC ---
+        function showSection(id) {
+            document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+    </script>
 
 </body>
 </html>
