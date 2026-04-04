@@ -1,2 +1,103 @@
 <h1>My Academic Website</h1>
 <h1>for teaching and research </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhua Huang | Academic Profile</title>
+    <style>
+        /* Basic Page Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            border-bottom: 2px solid #004d40;
+            padding: 10px 0;
+            margin-bottom: 30px;
+            text-align: right;
+        }
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #004d40;
+            font-weight: bold;
+        }
+        nav a:hover { color: #00796b; }
+
+        /* Bio and Photo Layout */
+        .profile-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .bio-text { flex: 2; }
+        .profile-pic {
+            flex: 1;
+            max-width: 250px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Section Headings */
+        h1 { margin-top: 0; color: #004d40; }
+        h2 { border-left: 5px solid #004d40; padding-left: 10px; color: #004d40; }
+
+        /* Responsive design for mobile */
+        @media (max-width: 600px) {
+            .profile-container { flex-direction: column-reverse; text-align: center; }
+            nav { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#teaching">Teaching</a>
+        <a href="#publications">Publications</a>
+        <a href="#others">Others</a>
+    </nav>
+
+    <div class="profile-container">
+        <div class="bio-text">
+            <h1>Minhua Huang</h1>
+            <p>
+                Welcome to my academic homepage. I am a Professor in the Computer Science department 
+                specializing in <strong>Human-Computer Interaction (HCI)</strong> and 
+                <strong>Natural Language Processing (NLP)</strong>. My research focuses on 
+                emotionally adaptive dialogue systems and uncertainty-aware chatbots.
+            </p>
+            <p>
+                In addition to HCI research, I am deeply involved in parallel computing 
+                optimization, specifically leveraging Genetic Algorithms for large-scale 
+                combinatorial problems.
+            </p>
+        </div>
+        <img src="profile.jpg" alt="Minhua Huang" class="profile-pic">
+    </div>
+
+    <section id="teaching">
+        <h2>Teaching</h2>
+        <p>Details about current courses and instructional materials go here.</p>
+    </section>
+
+    <section id="publications">
+        <h2>Publications</h2>
+        <p>A list of recent papers, including work for HCII 2026 and GECCO 2026.</p>
+    </section>
+
+    <section id="others">
+        <h2>Others</h2>
+        <p>Service, awards, or other academic activities.</p>
+    </section>
+
+</body>
+</html>
