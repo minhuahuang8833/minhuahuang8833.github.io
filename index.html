@@ -1,110 +1,85 @@
-<h1>My Academic Website</h1>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minhua Huang | Academic Profile</title>
+    <title>Minhua Huang | Texas A&M University-Corpus Christi</title>
     <style>
-        /* Basic Page Styling */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; color: #333; }
+        
         /* Navigation Bar */
-        nav {
-            border-bottom: 2px solid #004d40;
-            padding: 10px 0;
-            margin-bottom: 30px;
-            text-align: right;
-        }
-        nav a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: #004d40;
-            font-weight: bold;
-        }
-        nav a:hover { color: #00796b; }
+        nav { border-bottom: 2px solid #004d40; padding: 15px 0; margin-bottom: 30px; text-align: right; }
+        nav a { margin-left: 25px; text-decoration: none; color: #004d40; font-weight: bold; cursor: pointer; }
+        nav a:hover { color: #00796b; text-decoration: underline; }
 
-        /* Bio and Photo Layout */
-        .profile-container {
-            display: flex;
-            align-items: flex-start;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
+        /* Layout for Bio/Photo */
+        .profile-container { display: flex; gap: 40px; align-items: flex-start; }
         .bio-text { flex: 2; }
-        .profile-pic {
-            flex: 1;
-            max-width: 250px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
+        .profile-pic { flex: 1; max-width: 280px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-        /* Section Headings */
-        h1 { margin-top: 0; color: #004d40; }
-        h2 { border-left: 5px solid #004d40; padding-left: 10px; color: #004d40; }
+        /* Sections */
+        .content-section { display: none; animation: fadeIn 0.5s; }
+        #home-section { display: block; } /* Show Home/Bio by default */
 
-        /* Responsive design for mobile */
-        @media (max-width: 600px) {
-            .profile-container { flex-direction: column-reverse; text-align: center; }
-            nav { text-align: center; }
-        }
+        h1 { color: #004d40; margin-top: 0; }
+        h2 { color: #004d40; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 768px) { .profile-container { flex-direction: column-reverse; text-align: center; } .profile-pic { margin: 0 auto; } }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#teaching">Teaching</a>
-        <a href="#publications">Publications</a>
-        <a href="#others">Others</a>
+        <a onclick="showSection('home-section')">Home</a>
+        <a onclick="showSection('teaching-section')">Teaching</a>
+        <a onclick="showSection('publications-section')">Publications</a>
     </nav>
 
-    <div class="profile-container">
-        <div class="bio-text">
-            <h1>Minhua Huang</h1>
-            <p>
-                Welcome to my academic homepage. I am a Professor in the Computer Science department 
-                specializing in <strong>Human-Computer Interaction (HCI)</strong> and 
-                <strong>Natural Language Processing (NLP)</strong>. My research focuses on 
-                emotionally adaptive dialogue systems and uncertainty-aware chatbots.
-            </p>
-            <p>
-                In addition to HCI research, I am deeply involved in parallel computing 
-                optimization, specifically leveraging Genetic Algorithms for large-scale 
-                combinatorial problems.
-            </p>
+    <div id="home-section" class="content-section">
+        <div class="profile-container">
+            <div class="bio-text">
+                <h1>Minhua Huang</h1>
+                <p><strong>Professor of Computer Science</strong><br>
+                Department of Computer Science, Texas A&M University-Corpus Christi</p>
+                
+                <p>I am a researcher and educator specializing in <strong>Human-Computer Interaction (HCI)</strong> and <strong>Natural Language Processing (NLP)</strong>. My current work focuses on emotionally adaptive dialogue systems and distributed optimization using Genetic Algorithms.</p>
+                
+                <p>I will be presenting my recent work at <strong>HCII 2026</strong> in Montreal and <strong>GECCO 2026</strong> in San José, Costa Rica.</p>
+            </div>
+            <img src="profile.jpg" alt="Minhua Huang" class="profile-pic">
         </div>
-        <img src="profile.jpg" alt="Minhua Huang" class="profile-pic">
     </div>
 
-    <section id="teaching">
-    <h2>Teaching</h2>
-    <p>I have taught a variety of courses over the years at Texas A&M University-Corpus Christi. Below is my current and historical course list:</p>
-    
-    <div style="width: 100%; height: 800px; border: 1px solid #ccc;">
-        <embed src="teaching.pdf" type="application/pdf" width="100%" height="100%" />
+    <div id="teaching-section" class="content-section">
+        <h2>Teaching & Courses</h2>
+        <p>Below is a comprehensive list of my current and historical courses. You can also <a href="teaching.pdf" target="_blank">download the PDF here</a>.</p>
+        <div style="width: 100%; height: 800px; border: 1px solid #ccc;">
+            <embed src="teaching.pdf" type="application/pdf" width="100%" height="100%" />
+        </div>
     </div>
-    
-    <p style="margin-top: 10px;">
-        <a href="teaching.pdf" target="_blank">Download Course List (PDF)</a>
-    </p>
-</section>
 
-    <section id="publications">
-        <h2>Publications</h2>
-        <p>A list of recent papers, including work for HCII 2026 and GECCO 2026.</p>
-    </section>
+    <div id="publications-section" class="content-section">
+        <h2>Selected Publications</h2>
+        <ul>
+            <li><strong>SentimentAwareChatbot: An HCI–NLP Framework for Emotionally Adaptive Dialogue</strong>, HCII 2026.</li>
+            <li><strong>Ring-Crossover Parallel Genetic Algorithm (RC-PGA)</strong>, GECCO 2026.</li>
+        </ul>
+    </div>
 
-    <section id="others">
-        <h2>Others</h2>
-        <p>Service, awards, or other academic activities.</p>
-    </section>
+    <script>
+        function showSection(id) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(s => s.style.display = 'none');
+            
+            // Show the selected section
+            document.getElementById(id).style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
 
 </body>
 </html>
