@@ -115,7 +115,8 @@
             type: "Conference",
             venue: "GECCO 2026", 
             detail: "The Genetic and Evolutionary Computation Conference",
-            year: 2026 
+            year: 2026 ,
+            status: Accepted
         },
         { 
             title: "SentimentAwareChatbot: An HCI–NLP Framework for Emotionally Adaptive Dialogue",
@@ -123,7 +124,8 @@
             type: "Conference",
             venue: "HCII 2026", 
             detail: "28th International Conference on Human-Computer Interaction",
-            year: 2026 
+            year: 2026 ,
+            status: Accepted
         },
         { 
            title: "A GA-Based Wrapper Approach for Feature Selection in Multi-Class SVMs Across Heterogeneous Data Modalities",
@@ -131,7 +133,8 @@
            type: "Conference",
            venue: "AMLDS 2026", 
            detail: "2nd International Conference on Advanced Machine Learning and Data Science",
-           year: 2026
+           year: 2026 ,
+           status: Accpted 
         },
         { 
             title: "A Method for Discovering Knowledge in Texts", 
@@ -219,7 +222,7 @@
         });
 
         // Populate Research with Type Labels
-    research.forEach(r => {
+      research.forEach(r => {
     const li = document.createElement('li');
     li.style.marginBottom = "15px";
     
@@ -230,7 +233,18 @@
             ${r.type}:
         </span>
         <em>${r.venue}</em>, ${r.detail} (${r.year})
-       ${r.award ? `<br><span style="color: #1e3a8a; font-weight: bold;">🏆 ${r.award}</span>` : ''}
+
+        ${r.status ? `
+            <br><span style="color: ${r.status === "accepted" ? "#2e7d32" : "#616161"}; font-weight: bold;">
+                ${r.status === "accepted" ? "Accepted" : "Published"}
+            </span>
+        ` : ''}
+
+        ${r.award ? `
+            <br><span style="color: #1e3a8a; font-weight: bold;">
+                🏆 ${r.award}
+            </span>
+        ` : ''}
     `;
     
     if (r.year === curYear || r.year === prevYear) {
