@@ -222,7 +222,7 @@
         });
 
         // Populate Research with Type Labels
-      research.forEach(r => {
+     research.forEach(r => {
     const li = document.createElement('li');
     li.style.marginBottom = "15px";
     
@@ -233,18 +233,7 @@
             ${r.type}:
         </span>
         <em>${r.venue}</em>, ${r.detail} (${r.year})
-
-        ${r.status ? `
-            <br><span style="color: ${r.status === "accepted" ? "#2e7d32" : "#616161"}; font-weight: bold;">
-                ${r.status === "accepted" ? "Accepted" : "Published"}
-            </span>
-        ` : ''}
-
-        ${r.award ? `
-            <br><span style="color: #1e3a8a; font-weight: bold;">
-                🏆 ${r.award}
-            </span>
-        ` : ''}
+       ${r.award ? `<br><span style="color: #1e3a8a; font-weight: bold;">🏆 ${r.award}</span>` : ''}
     `;
     
     if (r.year === curYear || r.year === prevYear) {
