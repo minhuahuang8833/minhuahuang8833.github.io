@@ -61,34 +61,9 @@
         </div>
     </div>
 
-    <div id="teaching-history" class="content-section">
+   <div id="teaching-history" class="content-section">
         <h2>Three-Year Teaching History</h2>
-        const fullT = document.getElementById('list-teach-full');
-fullT.innerHTML = ''; // Clear it first
-
-let lastYear = null;
-
-courses.forEach(c => {
-    // Check if we have moved to a new year to add a subheading
-    if (c.year !== lastYear) {
-        const subHead = document.createElement('li');
-        subHead.style.listStyle = "none";
-        subHead.style.marginTop = "25px";
-        subHead.style.marginBottom = "10px";
-        subHead.innerHTML = `<h3 style="color: #004d40; border-bottom: 1px solid #eee; display: inline-block; width: 100%;">${c.year}</h3>`;
-        fullT.appendChild(subHead);
-        lastYear = c.year;
-    }
-
-    // Create the course item
-    const li = document.createElement('li');
-    li.style.marginBottom = "8px";
-    li.innerHTML = `
-        <strong>${c.id}</strong>: ${c.name} 
-        <span style="color: #666;">(${c.term})</span>
-    `;
-    fullT.appendChild(li);
-});
+        <ul id="list-teach-full"></ul>
         <p><a href="javascript:void(0)" onclick="showSection('main-page')" style="color:#004d40; font-weight:bold;">&larr; Back Home</a></p>
     </div>
 
