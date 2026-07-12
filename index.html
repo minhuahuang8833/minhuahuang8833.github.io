@@ -127,11 +127,12 @@
             title: "SentimentAwareChatbot: An HCI–NLP Framework for Emotionally Adaptive Dialogue",
             authors: "Minhua Huang", 
             type: "Conference", 
-            venue: "HCII 2026",  
+            venue: "Artificial Intelligence in HCI (LNCS, Springer)",  
             detail: "The 28th International Conference on Human-Computer Interaction",
             year: 2026,
             doi: "10.1007/978-3-032-30860-3_21",
-            url: "https://link.springer.com/chapter/10.1007/978-3-032-30860-3_21"
+            url: "https://link.springer.com/chapter/10.1007/978-3-032-30860-3_21",
+            status: "Published"
         },
         { 
            title: "A GA-Based Wrapper Approach for Feature Selection in Multi-Class SVMs Across Heterogeneous Data Modalities",
@@ -228,7 +229,7 @@
         });
 
         // Populate Research with Type Labels
-     research.forEach(r => {
+    research.forEach(r => {
     const li = document.createElement('li');
     li.style.marginBottom = "15px";
     
@@ -239,8 +240,24 @@
             ${r.type}:
         </span>
         <em>${r.venue}</em>, ${r.detail} (${r.year})
-       ${r.status ? `<br><span style="color: #ed6c02; font-weight: bold; font-size: 0.85em;">[${r.status}]</span>` : ''}
-       ${r.award ? `<br><span style="color: #1e3a8a; font-weight: bold;">🏆 ${r.award}</span>` : ''}
+        
+        ${r.doi ? `<br>
+        DOI: <a href="https://doi.org/${r.doi}" target="_blank">
+        ${r.doi}</a>` : ''}
+        
+        ${r.url ? `<br>
+        <a href="${r.url}" target="_blank">
+        🔗 Paper Link</a>` : ''}
+        
+        ${r.status ? `<br>
+        <span style="color: #ed6c02; font-weight: bold; font-size: 0.85em;">
+        [${r.status}]
+        </span>` : ''}
+        
+        ${r.award ? `<br>
+        <span style="color: #1e3a8a; font-weight: bold;">
+        🏆 ${r.award}
+        </span>` : ''}
     `;
     
     if (r.year === curYear || r.year === prevYear) {
@@ -248,6 +265,7 @@
     }
     fullR.appendChild(li);
 });
+
 
 
     }
