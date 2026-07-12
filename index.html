@@ -236,10 +236,13 @@
     li.innerHTML = `
         <strong>${r.title}</strong><br>
         <small>${r.authors}</small><br>
-        <span style="color: #00796b; font-weight: bold; font-size: 0.9em;">
-            ${r.type}:
-        </span>
-        <em>${r.venue}</em>, ${r.detail} (${r.year})
+       <em>${r.venue}</em><br>
+<span style="color: #555; font-size: 0.9em;">
+    ${r.detail} (${r.year})
+</span><br>
+<span style="color: #00796b; font-weight: bold; font-size: 0.9em;">
+    ${r.type}
+</span>
         
         ${r.doi ? `<br>
         DOI: <a href="https://doi.org/${r.doi}" target="_blank">
