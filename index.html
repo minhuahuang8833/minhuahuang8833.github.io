@@ -214,7 +214,7 @@
     // 2. AUTOMATION LOGIC
     function initSite() {
         const curYear = 2026;
-        const prevYear = curYear - 1;
+    
 
         // Sync labels with current year
         document.getElementById('label-teach').innerText = curYear + " COURSES";
@@ -271,7 +271,7 @@
         </span>` : ''}
     `;
     
-    if (r.year === curYear || r.year === prevYear) {
+    if (r.year === curYear ) {
         mainR.appendChild(li.cloneNode(true));
     }
     fullR.appendChild(li);
